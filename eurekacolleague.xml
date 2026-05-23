@@ -10,6 +10,51 @@
   <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap' rel='stylesheet'/>
  
   <b:skin><![CDATA[
+
+.search-post-title{
+text-align:center;
+margin:20px 0;
+}
+
+.search-post-title a{
+display:block;
+padding:22px;
+background:#6a0dad;
+color:#ffffff;
+text-decoration:none;
+font-size:1.6rem;
+font-weight:700;
+border-radius:20px;
+transition:0.3s;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.search-post-title a:hover{
+background:#9d4edd;
+transform:translateY(-5px);
+}
+
+.label-post-title{
+text-align:center;
+margin:20px 0;
+}
+
+.label-post-title a{
+display:block;
+padding:20px;
+background:#6a0dad;
+color:#ffffff;
+text-decoration:none;
+font-size:1.5rem;
+font-weight:700;
+border-radius:18px;
+transition:0.3s;
+}
+
+.label-post-title a:hover{
+background:#9d4edd;
+transform:translateY(-4px);
+}
 /* Related Posts */
 .related-topics {
     margin-top: 40px;
@@ -86,10 +131,10 @@ flex-shrink:0;
 display:flex;
 align-items:center;
 justify-content:center;
-height:120px;
+height:50px;
 padding:20px;
 background:var(--bg-surface);
-border:1px solid var(--border);
+border:0px solid var(--border);
 border-radius:20px;
 text-decoration:none;
 color:#ffffff;
@@ -98,6 +143,7 @@ font-size:1rem;
 text-align:center;
 transition:var(--transition);
 box-shadow:var(--shadow-card);
+
 }
 
 .related-card a:hover{
@@ -162,16 +208,16 @@ padding:16px;
        ========================================================================== */
     :root {
         --primary: #9d4edd;      /* Electric Neon Purple */
-        --primary-accent: #c8b6ff; /* Soft Pastel Purple Accent */
-        --neon-green: #3a86ff;   /* Pop Highlight Color */
+        --primary-accent: #ffc552; /* Soft Pastel Purple Accent */
+        --neon-green: #ffc552;   /* Pop Highlight Color */
         
         --text-main: #ffffff;    /* Bright white text for contrast */
         --text-muted: #a3a3a3;   /* Light gray description text */
         --text-ghost: #525252;   /* Darker structural text */
         
-        --bg-body: #ffffff;      /* Deep Midnight Black Body */
-        --bg-card: #161a1d;      /* Dark Anthracite Card Background */
-        --bg-surface: #202429;   /* Inner-element Gray Container */
+        --bg-body: #000000;      /* Deep Midnight Black Body */
+        --bg-card: #000000;      /* Dark Anthracite Card Background */
+        --bg-surface: #000000;   /* Inner-element Gray Container */
         
         --border: #2f353c;       /* Clean Dark Border Line */
         --border-active: #9d4edd; /* Focused Active Border Line */
@@ -311,7 +357,7 @@ padding:16px;
 
     /* Neon Accent Word Post Entry Cards */
     .dict-entry {
-        background: var(--bg-card);
+    background: #ffffff; /* Purple */
         padding: 48px;
         border-radius: var(--radius-md);
         box-shadow: var(--shadow-card);
@@ -356,7 +402,7 @@ padding:16px;
    
     .word-title a { 
         text-decoration: none; 
-        color: var(--text-main); 
+        color: #000000; 
         transition: color 0.2s ease;
     }
     
@@ -386,7 +432,7 @@ padding:16px;
     /* Definition Text Area */
     .entry-content { 
         font-size: 1.15rem; 
-        color: #e5e5e5; 
+        color: #000000; 
     }
    
     .phonetic-text {
@@ -496,14 +542,14 @@ padding:16px;
 #FeaturedPost1 .title,
 #FeaturedPost1 h2,
 #FeaturedPost1 h3 {
-    color: #000000 !important; /* Change to any color */
+    color: #ffffff !important; /* Change to any color */
 }
 
 /* Popular Posts Widget Title Color */
 #PopularPosts1 .title,
 #PopularPosts1 .widget-title,
 #PopularPosts1 h2 {
-    color: #000000 !important; /* Change color here */
+    color: #ffffff !important; /* Change color here */
 }
 
 /* Related Topics Section */
@@ -1172,7 +1218,31 @@ padding:16px;
 
             <!-- Comprehensive Definition Breakdown Body -->
            <div class='entry-content'>
+
+<b:if cond='data:view.isLabelSearch'>
+
+  <h3 class='label-post-title'>
+    <a expr:href='data:post.url'>
+      <data:post.title/>
+    </a>
+  </h3>
+
+<b:else/>
+
+  <b:if cond='data:view.isSearch'>
+
+  <h3 class='search-post-title'>
+    <a expr:href='data:post.url'>
+      <data:post.title/>
+    </a>
+  </h3>
+
+<b:else/>
+
   <data:post.body/>
+
+</b:if>
+</b:if>
 
 <!-- Related Posts Slider -->
 <b:if cond='data:view.isPost'>
@@ -1219,7 +1289,7 @@ relatedUrls.push(posturl);
 
 var output = '';
 
-for (var k = 0; k < relatedTitles.length && k < 4; k++) {
+for (var k = 0; k < relatedTitles.length && k < 5; k++) {
 
 output += '<div class="related-card">';
 output += '<a href="' + relatedUrls[k] + '">';
